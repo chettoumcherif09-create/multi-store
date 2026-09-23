@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>متجري</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <i class="fas fa-store" id="storeIcon"></i>
+        <span id="storeName">متجري</span>
+      </a>
+      
+      <div class="nav-links">
+        <a href="#products">المنتجات</a>
+        <a href="#contact">تواصل</a>
+      </div>
+      
+      <button class="cart-btn" id="cartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-icon">
+        <i class="fas fa-store"></i>
+      </div>
+      <h1 id="heroStoreName">متجري</h1>
+      <p id="heroDescription">أفضل المنتجات بأفضل الأسعار</p>
+      
+      <a href="#products" class="hero-btn">
+        <i class="fas fa-shopping-bag"></i>
+        تصفح المنتجات
+      </a>
+      
+      <div class="hero-features">
+        <div class="hero-feature">
+          <i class="fas fa-truck-fast"></i>
+          <span>58 ولاية</span>
+        </div>
+        <div class="hero-feature">
+          <i class="fas fa-hand-holding-usd"></i>
+          <span>دفع عند الاستلام</span>
+        </div>
+        <div class="hero-feature">
+          <i class="fas fa-shield-alt"></i>
+          <span>ضمان الجودة</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- التصنيفات -->
+  <section class="categories">
+    <div class="categories-container" id="categoriesContainer">
+      <button class="category-btn active" data-category="all">
+        <i class="fas fa-th"></i> الكل
+      </button>
+    </div>
+  </section>
+
+  <!-- المنتجات -->
+  <section class="products" id="products">
+    <h2 class="section-title">
+      <i class="fas fa-gift"></i> منتجاتنا
+    </h2>
+    
+    <div class="products-grid" id="productsGrid"></div>
+    
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <i class="fas fa-box-open"></i>
+      <h3>لا توجد منتجات</h3>
+      <p>قريباً جداً...</p>
+    </div>
+  </section>
+
+  <!-- تواصل -->
+  <section class="contact" id="contact">
+    <div class="contact-content">
+      <h2><i class="fas fa-headset"></i> تواصل معنا</h2>
+      <p>لأي استفسار، تواصل معنا مباشرة</p>
+      
+      <a href="#" id="whatsappBtn" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        واتساب: <span id="whatsappNumber">0542698759</span>
+      </a>
+      
+      <div class="contact-info">
+        <div class="info-item">
+          <i class="fas fa-truck"></i>
+          <div>
+            <strong>التوصيل</strong>
+            <span>58 ولاية</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <div>
+            <strong>الدفع</strong>
+            <span>عند الاستلام</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <div>
+            <strong>التوصيل</strong>
+            <span>1-7 أيام</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-store"></i>
+        <span id="footerStoreName">متجري</span>
+      </div>
+      <p>© 2026 <span id="footerYear">متجري</span> - جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <!-- السلة الجانبية -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> سلة التسوق</h3>
+      <button class="cart-close" id="cartClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="cart-items" id="cartItems"></div>
+    
+    <div class="cart-empty" id="cartEmpty">
+      <i class="fas fa-shopping-basket"></i>
+      <p>السلة فارغة</p>
+    </div>
+    
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="cart-total">
+        <span>المجموع:</span>
+        <strong id="cartTotal">0 دج</strong>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">
+        <i class="fas fa-check"></i>
+        إتمام الطلب
+      </button>
+    </div>
+  </aside>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

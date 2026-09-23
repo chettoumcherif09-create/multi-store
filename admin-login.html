@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>🔐 دخول اللوحة</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #0a0a0a 70%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+      border: 2px solid #e63946;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 0 50px rgba(230, 57, 70, 0.3);
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .login-logo {
+      font-size: 60px;
+      color: #e63946;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 20px rgba(230, 57, 70, 0.6));
+    }
+    
+    .login-header h1 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    
+    .login-header p {
+      color: #b0b0b0;
+      font-size: 14px;
+    }
+    
+    .form-group { margin-bottom: 20px; }
+    
+    .form-group label {
+      display: block;
+      color: #b0b0b0;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .form-group label i {
+      color: #e63946;
+      margin-left: 5px;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      background: #0a0a0a;
+      border: 2px solid #252525;
+      border-radius: 12px;
+      color: white;
+      font-family: 'Cairo', sans-serif;
+      font-size: 15px;
+      transition: all 0.2s;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: #e63946;
+      box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+    }
+    
+    .form-control::placeholder { color: #666; }
+    
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(145deg, #e63946, #b71c1c);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 4px 0 #8b0000, 0 0 30px rgba(230, 57, 70, 0.4);
+      transition: all 0.2s;
+      margin-top: 10px;
+    }
+    
+    .login-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #8b0000;
+    }
+    
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .error-msg {
+      display: none;
+      padding: 12px;
+      background: rgba(230, 57, 70, 0.15);
+      border: 2px solid #e63946;
+      border-radius: 10px;
+      color: #ff5c6a;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .error-msg.show { display: block; }
+    
+    .back-link {
+      display: block;
+      text-align: center;
+      color: #b0b0b0;
+      text-decoration: none;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+    
+    .back-link:hover { color: #e63946; }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    
+    <div class="login-header">
+      <div class="login-logo">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h1>لوحة التحكم</h1>
+      <p>ادخل بياناتك للوصول</p>
+    </div>
+    
+    <div class="error-msg" id="errorMsg"></div>
+    
+    <form id="loginForm">
+      <div class="form-group">
+        <label><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+        <input 
+          type="email" 
+          id="email" 
+          class="form-control" 
+          placeholder="admin@stor.com"
+          required
+        >
+      </div>
+      
+      <div class="form-group">
+        <label><i class="fas fa-lock"></i> كلمة المرور</label>
+        <input 
+          type="password" 
+          id="password" 
+          class="form-control" 
+          placeholder="••••••••"
+          required
+        >
+      </div>
+      
+      <button type="submit" class="login-btn" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i>
+        تسجيل الدخول
+      </button>
+    </form>
+    
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-right"></i> العودة للمتجر
+    </a>
+    
+  </div>
+
+  <script type="module" src="admin-login.js"></script>
+</body>
+</html>

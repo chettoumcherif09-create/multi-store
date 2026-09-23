@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>📂 الفئات</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --primary: #e63946;
+      --primary-dark: #b71c1c;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #1a1a1a;
+      --bg-tertiary: #252525;
+      --gold: #ffd700;
+      --green: #4caf50;
+      --white: #ffffff;
+      --gray: #b0b0b0;
+      --gray-dark: #666;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg-primary);
+      color: var(--white);
+      min-height: 100vh;
+    }
+    
+    .admin-header {
+      background: var(--bg-secondary);
+      padding: 15px 20px;
+      border-bottom: 2px solid var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .admin-header h1 {
+      font-size: 18px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .admin-header h1 i { color: var(--primary); }
+    
+    .back-btn {
+      padding: 10px 14px;
+      background: var(--bg-tertiary);
+      border: 2px solid var(--gray-dark);
+      border-radius: 10px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .admin-content {
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-bottom: 100px;
+    }
+    
+    .add-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      border: none;
+      border-radius: 14px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 4px 0 var(--primary-dark);
+      margin-bottom: 25px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .section-title i { color: var(--primary); }
+    .section-title span { color: var(--gold); font-family: monospace; }
+    
+    .categories-list { display: grid; gap: 12px; }
+    
+    .category-item {
+      background: var(--bg-secondary);
+      border-radius: 14px;
+      padding: 15px;
+      border: 2px solid var(--bg-tertiary);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    
+    .category-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 12px;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    
+    .category-info { flex: 1; }
+    .category-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .category-order { color: var(--gray); font-size: 12px; }
+    
+    .category-actions { display: flex; gap: 6px; }
+    
+    .btn-icon {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+    
+    .btn-edit {
+      background: rgba(255, 215, 0, 0.15);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    
+    .btn-delete {
+      background: rgba(230, 57, 70, 0.15);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    
+    .modal-overlay.active { display: flex; }
+    
+    .modal-content {
+      background: linear-gradient(145deg, var(--bg-secondary), var(--bg-primary));
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 25px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--primary);
+    }
+    
+    .modal-header h3 { font-size: 18px; display: flex; align-items: center; gap: 10px; }
+    
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--gray);
+      font-size: 22px;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+    
+    .form-group { margin-bottom: 18px; }
+    
+    .form-group label {
+      display: block;
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .form-group label span { color: var(--primary); }
+    
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-primary);
+      border: 2px solid var(--bg-tertiary);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: 'Cairo', sans-serif;
+      font-size: 15px;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    .icon-preview {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      background: var(--bg-primary);
+      border: 2px dashed var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: var(--primary);
+      margin: 10px auto;
+    }
+    
+    .icon-picker {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    
+    .icon-option {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 10px;
+      background: var(--bg-primary);
+      border: 2px solid var(--bg-tertiary);
+      color: var(--gray);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .icon-option.selected {
+      background: rgba(230, 57, 70, 0.15);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .save-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(145deg, var(--green), #2e7d32);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 0 #1b5e20;
+      margin-top: 10px;
+    }
+    
+    .save-btn:disabled { opacity: 0.6; }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+    
+    .empty-state i { font-size: 60px; color: var(--gray-dark); margin-bottom: 15px; }
+    .empty-state h3 { font-size: 18px; margin-bottom: 8px; }
+    
+    .loading { text-align: center; padding: 40px 20px; color: var(--gray); }
+    .loading i { font-size: 36px; color: var(--primary); margin-bottom: 10px; }
+    
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      padding: 14px 20px;
+      background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 900;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 0 var(--primary-dark);
+      z-index: 999;
+    }
+    
+    .floating-btn i { font-size: 18px; }
+  </style>
+</head>
+<body>
+
+  <header class="admin-header">
+    <h1>
+      <i class="fas fa-tags"></i>
+      إدارة الفئات
+    </h1>
+    <a href="admin.html" class="back-btn">
+      <i class="fas fa-arrow-right"></i> رجوع
+    </a>
+  </header>
+
+  <main class="admin-content">
+    
+    <button class="add-btn" id="addCategoryBtn">
+      <i class="fas fa-plus-circle"></i>
+      إضافة فئة جديدة
+    </button>
+    
+    <h2 class="section-title">
+      <i class="fas fa-list"></i>
+      الفئات (<span id="categoriesCount">0</span>)
+    </h2>
+    
+    <div id="loadingDiv" class="loading">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>جاري التحميل...</p>
+    </div>
+    
+    <div class="categories-list" id="categoriesList" style="display: none;"></div>
+    
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <i class="fas fa-tags"></i>
+      <h3>لا توجد فئات</h3>
+      <p>أضف فئتك الأولى</p>
+    </div>
+    
+  </main>
+
+  <a href="admin.html" class="floating-btn">
+    <i class="fas fa-list"></i> الطلبات
+  </a>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">
+          <i class="fas fa-plus-circle"></i>
+          إضافة فئة
+        </h3>
+        <button class="modal-close" id="modalClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="form-group">
+        <label>اسم الفئة <span>*</span></label>
+        <input type="text" id="categoryName" class="form-control" placeholder="مثال: صوتيات">
+      </div>
+      
+      <div class="form-group">
+        <label>الترتيب</label>
+        <input type="number" id="categoryOrder" class="form-control" placeholder="1" value="1">
+      </div>
+      
+      <div class="form-group">
+        <label>الأيقونة</label>
+        <div class="icon-preview" id="iconPreview">
+          <i class="fas fa-tag"></i>
+        </div>
+        <div class="icon-picker" id="iconPicker">
+          <button class="icon-option selected" data-icon="fas fa-tag"><i class="fas fa-tag"></i></button>
+          <button class="icon-option" data-icon="fas fa-music"><i class="fas fa-music"></i></button>
+          <button class="icon-option" data-icon="fas fa-lightbulb"><i class="fas fa-lightbulb"></i></button>
+          <button class="icon-option" data-icon="fas fa-mobile-alt"><i class="fas fa-mobile-alt"></i></button>
+          <button class="icon-option" data-icon="fas fa-tools"><i class="fas fa-tools"></i></button>
+          <button class="icon-option" data-icon="fas fa-car"><i class="fas fa-car"></i></button>
+          <button class="icon-option" data-icon="fas fa-tshirt"><i class="fas fa-tshirt"></i></button>
+          <button class="icon-option" data-icon="fas fa-home"><i class="fas fa-home"></i></button>
+          <button class="icon-option" data-icon="fas fa-utensils"><i class="fas fa-utensils"></i></button>
+          <button class="icon-option" data-icon="fas fa-book"><i class="fas fa-book"></i></button>
+          <button class="icon-option" data-icon="fas fa-gamepad"><i class="fas fa-gamepad"></i></button>
+          <button class="icon-option" data-icon="fas fa-heart"><i class="fas fa-heart"></i></button>
+          <button class="icon-option" data-icon="fas fa-shopping-bag"><i class="fas fa-shopping-bag"></i></button>
+          <button class="icon-option" data-icon="fas fa-gem"><i class="fas fa-gem"></i></button>
+          <button class="icon-option" data-icon="fas fa-palette"><i class="fas fa-palette"></i></button>
+          <button class="icon-option" data-icon="fas fa-camera"><i class="fas fa-camera"></i></button>
+          <button class="icon-option" data-icon="fas fa-headphones"><i class="fas fa-headphones"></i></button>
+          <button class="icon-option" data-icon="fas fa-clock"><i class="fas fa-clock"></i></button>
+        </div>
+      </div>
+      
+      <button class="save-btn" id="saveCategoryBtn">
+        <i class="fas fa-save"></i>
+        حفظ الفئة
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="admin-categories.js"></script>
+</body>
+</html>

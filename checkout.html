@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>📝 إتمام الطلب</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --primary: #e63946;
+      --primary-dark: #b71c1c;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #1a1a1a;
+      --bg-tertiary: #252525;
+      --gold: #ffd700;
+      --green: #4caf50;
+      --white: #ffffff;
+      --gray: #b0b0b0;
+      --gray-dark: #666;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg-primary);
+      color: var(--white);
+      min-height: 100vh;
+    }
+    
+    .checkout-header {
+      background: var(--bg-secondary);
+      padding: 15px 20px;
+      border-bottom: 2px solid var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .checkout-header h1 {
+      font-size: 18px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .checkout-header h1 i { color: var(--primary); }
+    
+    .back-btn {
+      padding: 10px 14px;
+      background: var(--bg-tertiary);
+      border: 2px solid var(--gray-dark);
+      border-radius: 10px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .checkout-content {
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-bottom: 100px;
+    }
+    
+    .checkout-card {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 20px;
+      border: 2px solid var(--bg-tertiary);
+    }
+    
+    .checkout-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .checkout-card h3 i { color: var(--primary); }
+    
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: var(--bg-primary);
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+    
+    .order-item-name { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+    .order-item-qty { color: var(--gray); font-size: 12px; }
+    .order-item-price { color: var(--gold); font-weight: 700; font-size: 14px; }
+    
+    .order-summary {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px solid var(--bg-tertiary);
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      color: var(--gray);
+      font-size: 14px;
+    }
+    
+    .summary-row.total {
+      padding-top: 12px;
+      margin-top: 8px;
+      border-top: 2px solid var(--primary);
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 900;
+    }
+    
+    .summary-row.total strong { color: var(--gold); font-size: 22px; }
+    
+    .form-group { margin-bottom: 18px; }
+    
+    .form-group label {
+      display: block;
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .form-group label span { color: var(--primary); }
+    
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-primary);
+      border: 2px solid var(--bg-tertiary);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: 'Cairo', sans-serif;
+      font-size: 15px;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    textarea.form-control { resize: vertical; min-height: 80px; }
+    select.form-control { cursor: pointer; }
+    
+    .confirm-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 4px 0 var(--primary-dark);
+      margin-top: 15px;
+    }
+    
+    .confirm-btn:disabled { opacity: 0.6; }
+    
+    .cod-note {
+      text-align: center;
+      padding: 15px;
+      background: rgba(255, 215, 0, 0.1);
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 12px;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .empty-cart-msg {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--gray);
+    }
+    
+    .empty-cart-msg i { font-size: 70px; color: var(--gray-dark); margin-bottom: 20px; }
+    .empty-cart-msg h3 { font-size: 20px; margin-bottom: 10px; }
+    
+    .empty-cart-msg a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: var(--primary);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    
+    .loading { text-align: center; padding: 60px 20px; color: var(--gray); }
+    .loading i { font-size: 40px; color: var(--primary); margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+
+  <header class="checkout-header">
+    <h1>
+      <i class="fas fa-clipboard-check"></i>
+      إتمام الطلب
+    </h1>
+    <a href="index.html" class="back-btn">
+      <i class="fas fa-arrow-right"></i> رجوع
+    </a>
+  </header>
+
+  <main class="checkout-content">
+    
+    <div id="loadingDiv" class="loading">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>جاري التحميل...</p>
+    </div>
+    
+    <div id="emptyCart" class="empty-cart-msg" style="display: none;">
+      <i class="fas fa-shopping-basket"></i>
+      <h3>السلة فارغة</h3>
+      <p>أضف منتجات أولاً</p>
+      <a href="index.html">تصفح المنتجات</a>
+    </div>
+    
+    <div id="checkoutContent" style="display: none;">
+      
+      <div class="checkout-card">
+        <h3>
+          <i class="fas fa-shopping-bag"></i>
+          ملخص الطلب
+        </h3>
+        <div id="orderItems"></div>
+        <div class="order-summary">
+          <div class="summary-row">
+            <span>مجموع المنتجات</span>
+            <span id="productsSubtotal">0 دج</span>
+          </div>
+          <div class="summary-row">
+            <span>🚚 التوصيل</span>
+            <span id="shippingCost">اختر الولاية</span>
+          </div>
+          <div class="summary-row total">
+            <span>💰 الإجمالي</span>
+            <strong id="grandTotal">0 دج</strong>
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkout-card">
+        <h3>
+          <i class="fas fa-user"></i>
+          بياناتك
+        </h3>
+        
+        <div class="form-group">
+          <label>الاسم الكامل <span>*</span></label>
+          <input type="text" id="customerName" class="form-control" placeholder="مثال: أحمد بن علي">
+        </div>
+        
+        <div class="form-group">
+          <label>رقم الهاتف <span>*</span></label>
+          <input type="tel" id="customerPhone" class="form-control" placeholder="مثال: 0555123456">
+        </div>
+        
+        <div class="form-group">
+          <label>الولاية <span>*</span></label>
+          <select id="customerWilaya" class="form-control">
+            <option value="">-- اختر الولاية --</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>العنوان الكامل <span>*</span></label>
+          <textarea id="customerAddress" class="form-control" placeholder="مثال: حي 5 جويلية، عمارة 12، شقة 3"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>ملاحظات (اختياري)</label>
+          <textarea id="customerNotes" class="form-control" placeholder="أي تفاصيل إضافية"></textarea>
+        </div>
+      </div>
+      
+      <button class="confirm-btn" id="confirmOrderBtn">
+        <i class="fas fa-check-circle"></i>
+        تأكيد الطلب
+      </button>
+      
+      <div class="cod-note">
+        <i class="fas fa-hand-holding-usd"></i>
+        الدفع عند الاستلام
+      </div>
+      
+    </div>
+    
+  </main>
+
+  <script type="module" src="checkout.js"></script>
+</body>
+</html>
